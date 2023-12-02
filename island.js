@@ -58,26 +58,51 @@ function countIslands(matrix) {
             // Mark neighbor as visited
   // Return island count
   
-  // Your code here
+    // Your code here
+    const visited = new Set();
+    let count = 0;
+
+    matrix.forEach((matrixRow, indexMatrixRow) => {
+	matrixRow.forEach((item, itemIndex) => {
+	    let index = [indexMatrixRow, itemIndex]; 
+	    if (item === 1 && !visited.has(index.toString())) {
+		count++;
+		const stack = [ index  ];
+		//console.log(stack);
+		while (stack.length > 0) {
+		    let node = stack.pop();
+		    let neighbors = getNeighbors(node[0], node[1], matrix);
+		    neighbors.forEach(neighbor => {
+			if (!visited.has(neighbor.toString())) {
+			    stack.push(neighbor);
+			    visited.add(neighbor.toString());
+			}
+		    // zvisited.add(index);
+		    });
+		}
+	    };
+    });
+    });
+    return count;
 }
 
 // Uncomment the lines below for local testing
-const matrix = [
-                [1,1,1,0,0],
-                [0,1,1,0,1],
-                [0,1,1,0,1]
-              ]
+// const matrix = [
+//                 [1,1,1,0,0],
+//                 [0,1,1,0,1],
+//                 [0,1,1,0,1]
+//               ]
 
-console.log(getNeighbors(1, 1, matrix)); // [[0, 0], [0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
-console.log(getNeighbors(2,4, matrix)) // [[1,4]]
+// console.log(getNeighbors(1, 1, matrix)); // [[0, 0], [0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
+// console.log(getNeighbors(2,4, matrix)) // [[1,4]]
 
-const matrix2 = [
-                    [1,1,1,0,1],
-                    [0,0,0,0,1],
-                    [1,0,0,1,0],
-                ]
+// const matrix2 = [
+//                     [1,1,1,0,1],
+//                     [0,0,0,0,1],
+//                     [1,0,0,1,0],
+//                 ]
 
-console.log(countIslands(matrix)) // 2
-console.log(countIslands(matrix2)); // 3
+// console.log(countIslands(matrix)) // 2
+// console.log(countIslands(matrix2)); // 3
 
 module.exports = [countIslands, getNeighbors];
