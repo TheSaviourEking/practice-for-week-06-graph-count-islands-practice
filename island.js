@@ -1,16 +1,42 @@
 function getNeighbors(row, col, matrix) {
   
-  // Check top
-  // Check top right
-  // Check right
-  // Check bottom right
-  // Check bottom
-  // Check bottom left
-  // Check left
-  // Check top left
-  // Return neighbors
+    // Check top
+    const top = [ row - 1, col ];
+    // Check top right
+    const topRight = [ row - 1, col + 1 ];
+    // Check right
+    const right = [ row, col + 1 ];
+    // Check bottom right
+    const bottomRight = [ row + 1, col + 1 ]
+    // Check bottom
+    const bottom = [ row + 1, col ];
+    // Check bottom left
+    const bottomLeft = [ row + 1, col - 1 ];
+    // Check left
+    const left = [ row, col - 1 ];
+    // Check top left
+    const topLeft = [ row - 1, col - 1 ];
+    
+    // Return neighbors
+    const neighbors = [ topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight ];
   
-  // Your code here
+    // Your code here
+    // console.log(neighbors, 'all Neighbors');
+    const result = [];
+    neighbors.filter(neighbor => {
+	const neighborRow = neighbor[0];
+	const neighborCol = neighbor[1];
+
+	if (isValidNeighbor(neighbor, matrix)) result.push(neighbor);
+    });
+    return result;
+}
+
+function isValidNeighbor(neighbor, matrix) {
+	const neighborRow = neighbor[0];
+	const neighborCol = neighbor[1];
+
+	if ((neighborRow >= 0 && neighborRow < matrix.length) && (neighborCol >= 0 && neighborCol < matrix[0].length) && (matrix[neighborRow][neighborCol] === 1)) return true;
 }
 
 function countIslands(matrix) {
@@ -36,22 +62,22 @@ function countIslands(matrix) {
 }
 
 // Uncomment the lines below for local testing
-// const matrix = [
-//                 [1,1,1,0,0],
-//                 [0,1,1,0,1],
-//                 [0,1,1,0,1]
-//               ]
+const matrix = [
+                [1,1,1,0,0],
+                [0,1,1,0,1],
+                [0,1,1,0,1]
+              ]
 
-// console.log(getNeighbors(1, 1, matrix)); // [[0, 0], [0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
-// console.log(getNeighbors(2,4, matrix)) // [[1,4]]
+console.log(getNeighbors(1, 1, matrix)); // [[0, 0], [0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
+console.log(getNeighbors(2,4, matrix)) // [[1,4]]
 
-// const matrix2 = [
-//                     [1,1,1,0,1],
-//                     [0,0,0,0,1],
-//                     [1,0,0,1,0],
-//                 ]
+const matrix2 = [
+                    [1,1,1,0,1],
+                    [0,0,0,0,1],
+                    [1,0,0,1,0],
+                ]
 
-// console.log(countIslands(matrix)) // 2
-// console.log(countIslands(matrix2)); // 3
+console.log(countIslands(matrix)) // 2
+console.log(countIslands(matrix2)); // 3
 
 module.exports = [countIslands, getNeighbors];
