@@ -20,14 +20,12 @@ function getNeighbors(row, col, matrix) {
     const neighbors = [ topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight ];
   
     // Your code here
-    const result = [];
     return neighbors.filter(neighbor => {
 	const neighborRow = neighbor[0];
 	const neighborCol = neighbor[1];
 
 	if (isValidNeighbor(neighbor, matrix)) return true;
     });
-    return result;
 }
 
 function isValidNeighbor(neighbor, matrix) {
