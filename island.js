@@ -73,7 +73,6 @@ function countIslands(matrix) {
 			    stack.push(neighbor);
 			    visited.add(neighbor.toString());
 			}
-		    // zvisited.add(index);
 		    });
 		}
 	    };
