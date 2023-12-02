@@ -1,5 +1,4 @@
 function getNeighbors(row, col, matrix) {
-  
     // Check top
     const top = [ row - 1, col ];
     // Check top right
@@ -21,13 +20,12 @@ function getNeighbors(row, col, matrix) {
     const neighbors = [ topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight ];
   
     // Your code here
-    // console.log(neighbors, 'all Neighbors');
     const result = [];
-    neighbors.filter(neighbor => {
+    return neighbors.filter(neighbor => {
 	const neighborRow = neighbor[0];
 	const neighborCol = neighbor[1];
 
-	if (isValidNeighbor(neighbor, matrix)) result.push(neighbor);
+	if (isValidNeighbor(neighbor, matrix)) return true;
     });
     return result;
 }
